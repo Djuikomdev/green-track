@@ -3,6 +3,10 @@ import 'package:greentrack/responsive.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
+import '../../../services/bottle_service.dart';
+import '../../../services/production_service.dart';
+import '../../../services/rack_service.dart';
+import '../../../services/vente_service.dart';
 import 'file_info_card.dart';
 
 class MyFiles extends StatelessWidget {
@@ -52,7 +56,7 @@ class MyFiles extends StatelessWidget {
   }
 }
 
-class FileInfoCardGridView extends StatelessWidget {
+class FileInfoCardGridView extends StatefulWidget {
   const FileInfoCardGridView({
     Key? key,
     this.crossAxisCount = 4,
@@ -63,18 +67,49 @@ class FileInfoCardGridView extends StatelessWidget {
   final double childAspectRatio;
 
   @override
+  State<FileInfoCardGridView> createState() => _FileInfoCardGridViewState();
+}
+
+class _FileInfoCardGridViewState extends State<FileInfoCardGridView> {
+  var allBottles;
+  var allVentes;
+  var allRacks;
+  var allProductions;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    //init();
+  }
+  init()async{
+    var ventes = await VentesService().getVentes();
+    var racks = RackService().getRacks();
+    var productions = ProductionService().getProductions();
+    var bottleData = await BouteilleService().getBottles();
+
+
+    setState(() {
+      allBottles = bottleData;
+      allVentes = ventes;
+      allRacks = racks;
+      allProductions = productions;
+    });
+  }
+  @override
   Widget build(BuildContext context) {
     return GridView.builder(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: demoMyFiles.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: crossAxisCount,
+        crossAxisCount: widget.crossAxisCount,
         crossAxisSpacing: defaultPadding,
         mainAxisSpacing: defaultPadding,
-        childAspectRatio: childAspectRatio,
+        childAspectRatio: widget.childAspectRatio,
       ),
-      itemBuilder: (context, index) => FileInfoCard(info: demoMyFiles[index]),
+      itemBuilder: (context, index) => FileInfoCard(
+        info: demoMyFiles[index],
+        nb_item: 1540),
     );
   }
 }

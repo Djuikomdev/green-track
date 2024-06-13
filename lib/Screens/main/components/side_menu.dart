@@ -1,58 +1,72 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class SideMenu extends StatelessWidget {
+import '../main_screen.dart';
+
+class SideMenu extends StatefulWidget {
   const SideMenu({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<SideMenu> createState() => _SideMenuState();
+}
+
+class _SideMenuState extends State<SideMenu> {
+
+  @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
+      child: Column(
         children: [
           DrawerHeader(
-            child: Image.asset("assets/images/logo.png"),
+            child: Image.asset("assets/images/logo.jpg"),
           ),
+          ListView.builder(
+            itemCount: 5,
+              shrinkWrap: true,
+              itemBuilder: (_,index){
+            return  DrawerListTile(
+              title: data[index]["title"].toString(),
+              svgSrc: data[index]["icon"].toString(),
+              press: () async{
+                final SharedPreferences prefs = await SharedPreferences.getInstance();
+                setState(() {
+                  prefs.setInt("page", index);
+                });
+              },
+            );
+          }),
           DrawerListTile(
-            title: "Dashboard",
-            svgSrc: "assets/icons/menu_dashboard.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Transaction",
-            svgSrc: "assets/icons/menu_tran.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Task",
-            svgSrc: "assets/icons/menu_task.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Documents",
-            svgSrc: "assets/icons/menu_doc.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Store",
-            svgSrc: "assets/icons/menu_store.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Notification",
-            svgSrc: "assets/icons/menu_notification.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Profile",
-            svgSrc: "assets/icons/menu_profile.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Settings",
-            svgSrc: "assets/icons/menu_setting.svg",
-            press: () {},
+            title: "Deconnexion",
+            svgSrc: "assets/icons/signup.svg",
+            press: (){
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text("Se déconnecter"),
+                    content: Text("Voulez-vous vraiment vous déconnecter ?"),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          // Logique de déconnexion ici
+                          Navigator.of(context).pop();
+                        },
+                        child: Text("Oui"),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text("Non"),
+                      ),
+                    ],
+                  );
+                },
+              );
+            }
           ),
         ],
       ),
@@ -78,14 +92,51 @@ class DrawerListTile extends StatelessWidget {
       onTap: press,
       horizontalTitleGap: 0.0,
       leading: SvgPicture.asset(
-        svgSrc,
+        svgSrc,color: Colors.white,
         // colorFilter: ColorFilter.mode(Colors.white54, BlendMode.srcIn),
         height: 16,
       ),
       title: Text(
         title,
-        style: TextStyle(color: Colors.white54),
+        style: TextStyle(color: Colors.white),
       ),
     );
   }
 }
+var data = [
+  {
+    "title":"Accueil",
+    ""
+        "icon":"assets/icons/menu_dashboard.svg"
+  },
+  {
+    "title":"Profile",
+    "icon": "assets/icons/menu_profile.svg",
+  },
+  {
+    "title":"utilisateurs",
+    "icon":"assets/icons/menu_tran.svg",
+  },
+  {
+    "title":"Bouteilles",
+    "icon":"assets/icons/menu_task.svg",
+  },
+  {
+    "title":"Ventes",
+    "icon":"assets/icons/menu_doc.svg",
+  },
+  {
+    "title":"Production",
+    "icon":"assets/icons/menu_doc.svg",
+  },
+  {
+    "title":"Racks",
+    "icon":"assets/icons/menu_doc.svg",
+  },
+
+
+  {
+    "title":"Parametre",
+    "icon": "assets/icons/menu_setting.svg",
+  },
+];

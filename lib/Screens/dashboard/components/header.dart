@@ -1,16 +1,40 @@
 import 'package:greentrack/controllers/MenuAppController.dart';
+import 'package:greentrack/controllers/user_controller.dart';
 import 'package:greentrack/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../constants.dart';
+import '../../../models/user_model.dart';
 
-class Header extends StatelessWidget {
+class Header extends StatefulWidget {
   const Header({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<Header> createState() => _HeaderState();
+}
+
+class _HeaderState extends State<Header> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    init();
+  }
+  User? userinfo;
+
+  init()async{
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    User user = await UserController().getUserById(prefs.getString("userId").toString());
+    setState(() {
+      userinfo = user;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -28,15 +52,16 @@ class Header extends StatelessWidget {
         if (!Responsive.isMobile(context))
           Spacer(flex: Responsive.isDesktop(context) ? 2 : 1),
         Expanded(child: SearchField()),
-        ProfileCard()
+        userinfo==null?CircularProgressIndicator() :ProfileCard(username: userinfo!.username,)
       ],
     );
   }
 }
 
 class ProfileCard extends StatelessWidget {
+  final String username;
   const ProfileCard({
-    Key? key,
+    Key? key, required this.username,
   }) : super(key: key);
 
   @override
@@ -62,7 +87,7 @@ class ProfileCard extends StatelessWidget {
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
-              child: Text("John Doe"),
+              child: Text(username),
             ),
           Icon(Icons.keyboard_arrow_down),
         ],

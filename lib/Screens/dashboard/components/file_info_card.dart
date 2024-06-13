@@ -7,10 +7,11 @@ import '../../../constants.dart';
 class FileInfoCard extends StatelessWidget {
   const FileInfoCard({
     Key? key,
-    required this.info,
+    required this.info, required this.nb_item,
   }) : super(key: key);
 
   final CloudStorageInfo info;
+  final int nb_item;
 
   @override
   Widget build(BuildContext context) {
@@ -57,19 +58,13 @@ class FileInfoCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "${info.numOfFiles} Files",
+                "${nb_item}",
                 style: Theme.of(context)
                     .textTheme
                     .bodySmall!
                     .copyWith(color: Colors.white70),
               ),
-              Text(
-                info.totalStorage!,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodySmall!
-                    .copyWith(color: Colors.white),
-              ),
+
             ],
           )
         ],
