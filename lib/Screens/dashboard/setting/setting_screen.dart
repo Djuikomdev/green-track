@@ -10,6 +10,7 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
+  bool switched = false;
   @override
   Widget build(BuildContext context) {
     return  SafeArea(
@@ -43,18 +44,22 @@ class _SettingScreenState extends State<SettingScreen> {
                   },
                 ),
               ),
-              Divider(),
+              Divider(color: Colors.white,),
               ListTile(
                 leading: Icon(Icons.notifications),
                 title: Text('Notifications'),
                 trailing: Switch(
-                  value: true,
+                  value: switched,
+                  activeColor: Colors.red,
                   onChanged: (value) {
                     // Logique d'activation/désactivation des notifications
+                    setState(() {
+                      switched = !switched;
+                    });
                   },
                 ),
               ),
-              Divider(),
+              Divider(color: Colors.white,),
               ListTile(
                 leading: Icon(Icons.security),
                 title: Text('Sécurité'),
@@ -63,7 +68,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   // Naviguer vers la page de sécurité
                 },
               ),
-              Divider(),
+              Divider(color: Colors.white,),
               ListTile(
                 leading: Icon(Icons.info),
                 title: Text('À propos'),
@@ -72,10 +77,14 @@ class _SettingScreenState extends State<SettingScreen> {
                   // Naviguer vers la page "À propos"
                 },
               ),
-              Divider(),
+              Divider(color: Colors.white,),
               SizedBox(height: 20),
-              Center(
-                child: CustomButon(onPress: () {  }, title: 'Autre', color: Colors.blueAccent,),
+              Row(
+                children: [
+                  Center(
+                    child: CustomButon(onPress: () {  }, title: 'Autre', color: Colors.green,),
+                  ),
+                ],
               ),
             ],
           ),

@@ -24,20 +24,9 @@ class MyFiles extends StatelessWidget {
           children: [
             Text(
               "Mes performances",
-              style: Theme.of(context).textTheme.titleMedium,
+              style: TextStyle(color: Colors.black,fontSize: 20),
             ),
-            ElevatedButton.icon(
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.symmetric(
-                  horizontal: defaultPadding * 1.5,
-                  vertical:
-                      defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
-                ),
-              ),
-              onPressed: () {},
-              icon: Icon(Icons.add),
-              label: Text("Add New"),
-            ),
+
           ],
         ),
         SizedBox(height: defaultPadding),

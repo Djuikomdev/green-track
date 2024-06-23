@@ -59,12 +59,12 @@ class MyApp extends StatelessWidget {
         // Your app configuration
         debugShowCheckedModeBanner: false,
         title: 'GREEN TRACK',
-        theme: ThemeData.dark().copyWith(
-          scaffoldBackgroundColor: bgColor,
-          textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
-              .apply(bodyColor: Colors.white),
-          canvasColor: secondaryColor,
-        ),
+        // theme: ThemeData.light().copyWith(
+        //   scaffoldBackgroundColor: bgColor,
+        //   textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
+        //       .apply(bodyColor: Colors.white),
+        //   canvasColor: secondaryColor,
+        // ),
         home: userData == null ?WelcomeScreen(): MainScreen(),
       ),
     );

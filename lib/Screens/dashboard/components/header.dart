@@ -46,8 +46,8 @@ class _HeaderState extends State<Header> {
           ),
         if (!Responsive.isMobile(context))
           Text(
-            "Tableau de bord",
-            style: Theme.of(context).textTheme.titleLarge,
+            "BIENVENUE CHEZ GREEN TRACK",
+            style: TextStyle(fontWeight: FontWeight.bold,color: Colors.green,fontSize: 30),
           ),
         if (!Responsive.isMobile(context))
           Spacer(flex: Responsive.isDesktop(context) ? 2 : 1),
@@ -104,9 +104,11 @@ class SearchField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      style: TextStyle(color: Colors.black),
       decoration: InputDecoration(
-        hintText: "Search",
+        hintText: "Rechercher  .....",
         fillColor: secondaryColor,
+        hintStyle: TextStyle(color: Colors.black),
         filled: true,
         border: OutlineInputBorder(
           borderSide: BorderSide.none,

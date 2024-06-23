@@ -64,7 +64,7 @@ class _profilScreenState extends State<profilScreen> {
                 _user!.email,
                 style: TextStyle(
                   fontSize: 16,
-                  color: Colors.grey,
+                  color: Colors.black,
                 ),
               ),
               SizedBox(height: 20),
@@ -72,7 +72,7 @@ class _profilScreenState extends State<profilScreen> {
               SizedBox(height: 20),
               Row(
                 children: [
-                  Icon(Icons.location_on, color: Colors.grey),
+                  Icon(Icons.location_on, color: Colors.green),
                   SizedBox(width: 10),
                   Text(" role $c: "+_user!.role),
                 ],
@@ -80,17 +80,17 @@ class _profilScreenState extends State<profilScreen> {
               SizedBox(height: 10),
               Row(
                 children: [
-                  Icon(Icons.cake, color: Colors.grey),
+                  Icon(Icons.cake, color: Colors.green),
                   SizedBox(width: 10),
-                  Text(" Identifiant : "+_user!.id),
+                  Text(" Identifiant : "+_user!.id,style: TextStyle(color: Colors.black)),
                 ],
               ),
               SizedBox(height: 20),
               Row(
                 children: [
-                  Icon(Icons.phone, color: Colors.grey),
+                  Icon(Icons.phone, color: Colors.green),
                   SizedBox(width: 10),
-                  Text(" Téléphone : "+_user!.phone),
+                  Text(" Téléphone : "+_user!.phone,style: TextStyle(color: Colors.black),),
                 ],
               ),
 

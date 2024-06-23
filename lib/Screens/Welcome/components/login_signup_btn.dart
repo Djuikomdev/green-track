@@ -42,7 +42,7 @@ class LoginAndSignupBtn extends StatelessWidget {
               },
             ),
           );
-        }, title: 'S\'inscrire', color: kPrimaryColor,
+        }, title: 'S\'inscrire', color: Colors.amberAccent,
         ),
         // TextButton(
         //     onPressed: ()async{

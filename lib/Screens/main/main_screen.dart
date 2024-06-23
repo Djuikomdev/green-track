@@ -63,6 +63,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: context.read<MenuAppController>().scaffoldKey,
+      backgroundColor: Colors.lightGreen.withOpacity(.5),
       drawer: Drawer(
         child: SingleChildScrollView(
           child: Column(
@@ -136,18 +137,26 @@ class _MainScreenState extends State<MainScreen> {
                 // default flex = 1
                 // and it takes 1/6 part of the screen
                 child: Drawer(
+                  backgroundColor: Colors.green,
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
                         DrawerHeader(
-                          child: Image.asset("assets/images/logo.jpg"),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            image: DecorationImage(
+                              image: AssetImage("assets/images/logo.jpg"),
+                              fit: BoxFit.contain
+                            ),
+                          ),
+                          child: Container(),
                         ),
                         ListView.builder(
                             itemCount: data.length,
                             shrinkWrap: true,
                             itemBuilder: (_,index){
                               return  Container(
-                                color: page == index ? Colors.deepOrange:null,
+                                color: page == index ? Colors.white70.withOpacity(.2):null,
                                 child: DrawerListTile(
                                   title: data[index]["title"].toString(),
                                   svgSrc: data[index]["icon"].toString(),

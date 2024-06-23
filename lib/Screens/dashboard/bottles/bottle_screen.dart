@@ -105,6 +105,7 @@ class _BottleScreenState extends State<BottleScreen> {
                             Container(
                               width: 250,
                               height: 45,
+                              color: Colors.white,
                               child: TextField(
                                 onChanged: (value) {
                                   if (value.isEmpty) {

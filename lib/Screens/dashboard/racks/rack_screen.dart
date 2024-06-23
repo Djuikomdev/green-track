@@ -28,23 +28,28 @@ class _RackScreenState extends State<RackScreen> {
                 Container(
                   height: 50,
                   width: 400,
-                  child: TextField(
+                  child: Container(
+                    color: Colors.white,
+                    child: TextField(
+                      style: TextStyle(color: Colors.black),
+                      onChanged: (value) {
+                        if (value.isEmpty) {
+                          setState(() {
+                            //userList = userList2;
+                          });
+                        }
+                      },
+                      controller: _searchControlloer,
+                      decoration: InputDecoration(
 
-                    onChanged: (value) {
-                      if (value.isEmpty) {
-                        setState(() {
-                          //userList = userList2;
-                        });
-                      }
-                    },
-                    controller: _searchControlloer,
-                    decoration: InputDecoration(
-                      hintText: "Rechercher... ",
-                      suffixIcon: Icon(Icons.close).onTap((){setState(() {
-                        _searchControlloer.text = "";
-                      });}),
-                      border: OutlineInputBorder(),
-                      prefixIcon: Icon(Icons.search),
+                        hintText: "Rechercher... ",
+                        hintStyle: TextStyle(color: Colors.black),
+                        suffixIcon: Icon(Icons.close).onTap((){setState(() {
+                          _searchControlloer.text = "";
+                        });}),
+                        border: OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.search,color: Colors.green,),
+                      ),
                     ),
                   ),
                 ),
@@ -53,6 +58,7 @@ class _RackScreenState extends State<RackScreen> {
                 margin: EdgeInsets.only(top: 80),
                 decoration: BoxDecoration(
                   border: Border.all(),
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(10)
                 ),
                 height: 450,
@@ -63,8 +69,8 @@ class _RackScreenState extends State<RackScreen> {
                   itemBuilder: (_, index) {
                     return ExpansionTile(
                       key: ValueKey('rack_$index'),
-                      leading: Icon(Icons.group_work),
-                      title: Text("   Les racks $index                   nombre de bouteilles : 50"),
+                      leading: Icon(Icons.group_work,color: Colors.green,),
+                      title: Text("   Les racks $index                   nombre de bouteilles : 50",style: TextStyle(color: Colors.black)),
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,7 +82,8 @@ class _RackScreenState extends State<RackScreen> {
                               itemCount: 50,
                               itemBuilder: (_, bottleIndex) {
                                 return ListTile(
-                                  title: Text('       Numero: $bottleIndex         Serie : $bottleIndex        Etat: Plein         Localisation: Chez le client'),
+                                  title: Text('       Numero: $bottleIndex         Serie : $bottleIndex        Etat: Plein         Localisation: Chez le client',
+                                  style: TextStyle(color: Colors.black),),
                                   // Ajouter ici l'affichage des attributs de chaque bouteille
                                 );
                               },

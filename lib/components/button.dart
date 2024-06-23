@@ -24,7 +24,7 @@ class _CustomButonState extends State<CustomButon> {
             child: AppButton(
               onTap: widget.onPress,
               color: widget.color,
-              child: Text(widget.title),
+              child: Text(widget.title,style: TextStyle(fontWeight: FontWeight.w700,color: Colors.white),),
             ),
           ),
 

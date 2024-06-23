@@ -102,7 +102,7 @@ class _userScreenState extends State<userScreen> {
                             Container(
                               width: 250,
                               height: 45,
-
+                              color: Colors.white,
                               child: TextField(
 
                                 onChanged: (value){
@@ -135,7 +135,7 @@ class _userScreenState extends State<userScreen> {
                                     });
                                   },
                                   title: "Rechercher ",
-                                  color: Colors.indigoAccent),
+                                  color: Colors.green),
                             ),
                             SizedBox(width: 16.0),
                             Container(
@@ -145,7 +145,7 @@ class _userScreenState extends State<userScreen> {
                                     _showAddUserDialog(context);
                                   },
                                   title: "+  Ajouter un utilisateur ",
-                                  color: Colors.indigoAccent),
+                                  color: Colors.red),
                             ),
                           ],
                         ),

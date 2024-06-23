@@ -94,7 +94,7 @@ class _ClientScreenState extends State<ClientScreen> {
                           Container(
                             width: 250,
                             height: 45,
-
+                            color: Colors.white,
                             child: TextField(
 
                               onChanged: (value){
@@ -127,7 +127,7 @@ class _ClientScreenState extends State<ClientScreen> {
                                   });
                                 },
                                 title: "Rechercher ",
-                                color: Colors.indigoAccent),
+                                color: Colors.green),
                           ),
                           SizedBox(width: 16.0),
                           Container(
@@ -137,7 +137,7 @@ class _ClientScreenState extends State<ClientScreen> {
                                   _showAddClientDialog(context);
                                 },
                                 title: "+  Ajouter un client ",
-                                color: Colors.indigoAccent),
+                                color: Colors.red),
                           ),
                         ],
                       ),

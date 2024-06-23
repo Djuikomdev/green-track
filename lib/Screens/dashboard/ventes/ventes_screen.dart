@@ -66,22 +66,22 @@ class _VentesScreenState extends State<VentesScreen> {
     // TODO: implement initState
     super.initState();
     setState(() {
-      bottleForSell = bottleForSell
+      bottleForSell = bottleList
               ?.where((bottle) =>
-                  bottle.state == 'Plein' && bottle.localisation == "Magasin")
+                  bottle.state == 'plein' && bottle.localisation == "magasin")
               .toList() ??
           [];
-      bottleForSell2 = bottleForSell
+      bottleForSell2 = bottleList
               ?.where((bottle) =>
-                  bottle.state == 'Plein' && bottle.localisation == "Magasin")
+                  bottle.state == 'plein' && bottle.localisation == "magasin")
               .toList() ??
           [];
 
-      saleList = [];
-      initPage = true;
+      // saleList = [];
+      // initPage = true;
     });
     if (saleList!.isEmpty) {
-      // init();
+      init();
     } else {
       setState(() {
         initPage = true;
@@ -205,30 +205,33 @@ class _VentesScreenState extends State<VentesScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               // Barre de recherche de bouteilles
-                              TextField(
-                                controller: _searchControlloer2,
-                                decoration: InputDecoration(
-                                  hintText: "Rechercher une bouteille",
-                                  prefixIcon: Icon(Icons.search),
-                                ),
-                                onChanged: (value) {
-                                  // Logique de recherche de bouteilles
-                                  try {
-                                    if (value.isEmpty) {
-                                      setState(() {
-                                        bottleForSell = bottleForSell2;
-                                      });
-                                    }
+                              Container(
+                                color: Colors.white,
+                                child: TextField(
+                                  controller: _searchControlloer2,
+                                  decoration: InputDecoration(
+                                    hintText: "Rechercher une bouteille",
+                                    prefixIcon: Icon(Icons.search),
+                                  ),
+                                  onChanged: (value) {
+                                    // Logique de recherche de bouteilles
+                                    try {
+                                      if (value.isEmpty) {
+                                        setState(() {
+                                          bottleForSell = bottleForSell2;
+                                        });
+                                      }
 
-                                    var d = filterBottleList(
-                                        _searchControlloer2.text);
-                                    setState(() {
-                                      bottleForSell = d;
-                                    });
-                                  } catch (e) {
-                                    print("erreur de recherche : $e");
-                                  }
-                                },
+                                      var d = filterBottleList(
+                                          _searchControlloer2.text);
+                                      setState(() {
+                                        bottleForSell = d;
+                                      });
+                                    } catch (e) {
+                                      print("erreur de recherche : $e");
+                                    }
+                                  },
+                                ),
                               ),
                               SizedBox(height: 16.0),
 
@@ -239,7 +242,7 @@ class _VentesScreenState extends State<VentesScreen> {
                                   children: [
                                     Container(
                                       height: 400,
-                                      child: bottleList!.isEmpty
+                                      child: bottleForSell!.isEmpty
                                           ? Center(
                                               child:
                                                   Text("Aucun élément trouvé"),
@@ -247,8 +250,8 @@ class _VentesScreenState extends State<VentesScreen> {
                                           : ListView.builder(
                                               itemCount:
                                                   bottleForSell!.length > 100
-                                                      ? bottleForSell!.length
-                                                      : 100,
+                                                      ? 100
+                                                      : bottleForSell!.length,
                                               shrinkWrap: true,
                                               itemBuilder: (context, index) {
                                                 int actualIndex =
@@ -339,6 +342,7 @@ class _VentesScreenState extends State<VentesScreen> {
                                 Container(
                                   width: 250,
                                   height: 45,
+                                  color:Colors.white,
                                   child: TextField(
                                     onChanged: (value) {
                                       if (value.isEmpty) {
@@ -372,7 +376,7 @@ class _VentesScreenState extends State<VentesScreen> {
                                         });
                                       },
                                       title: "Rechercher ",
-                                      color: Colors.indigoAccent),
+                                      color: Colors.green),
                                 ),
                                 SizedBox(width: 16.0),
                                 Container(
@@ -385,7 +389,7 @@ class _VentesScreenState extends State<VentesScreen> {
                                         });
                                       },
                                       title: "+  Ajouter une vente ",
-                                      color: Colors.indigoAccent),
+                                      color: Colors.red),
                                 ),
                               ],
                             ),
@@ -553,16 +557,7 @@ class _VentesScreenState extends State<VentesScreen> {
                                                       ],
                                                     ),
                                                     leading: Icon(Icons.person),
-                                                    trailing: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      children: [
-                                                        Icon(
-                                                          Icons.delete_forever,
-                                                          color: Colors.red,
-                                                        ),
-                                                      ],
-                                                    ),
+
                                                   ),
                                                 ],
                                               );
