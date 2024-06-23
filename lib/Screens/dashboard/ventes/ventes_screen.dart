@@ -556,7 +556,7 @@ class _VentesScreenState extends State<VentesScreen> {
                                                                         .ellipsis)),
                                                       ],
                                                     ),
-                                                    leading: Icon(Icons.person),
+                                                    leading: Icon(Icons.shopping_basket_outlined),
 
                                                   ),
                                                 ],

@@ -1,14 +1,21 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:greentrack/models/rack_model.dart';
 
 class RackService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final String _collectionName = 'racks';
 
   // Récupérer tous les produits
-  Future<List<Map<String, dynamic>>> getRacks() async {
+  Future<List<Rack>> getRacks() async {
     final QuerySnapshot snapshot = await _firestore.collection(_collectionName).get();
-    return snapshot.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
+    final List<Rack> racks = [];
+    for (final DocumentSnapshot doc in snapshot.docs) {
+      final Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+      final Rack client = Rack.fromMap(data);
+      racks.add(client);
+    }
+    return racks;
   }
 
   // Récupérer un produit par son ID
