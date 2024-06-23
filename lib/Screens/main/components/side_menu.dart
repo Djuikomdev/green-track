@@ -114,7 +114,11 @@ var data = [
     "icon": "assets/icons/menu_profile.svg",
   },
   {
-    "title":"utilisateurs",
+    "title":"Utilisateurs",
+    "icon":"assets/icons/menu_tran.svg",
+  },
+  {
+    "title":"Clients",
     "icon":"assets/icons/menu_tran.svg",
   },
   {
@@ -127,6 +131,10 @@ var data = [
   },
   {
     "title":"Production",
+    "icon":"assets/icons/menu_doc.svg",
+  },
+  {
+    "title":"Retours",
     "icon":"assets/icons/menu_doc.svg",
   },
   {

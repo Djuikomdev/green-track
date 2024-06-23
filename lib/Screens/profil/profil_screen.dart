@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:greentrack/services/user_service.dart';
 
 import '../../components/button.dart';
+import '../../main.dart';
 import '../../models/user_model.dart';
 
-
+User? _user;
 class profilScreen extends StatefulWidget {
   const profilScreen({super.key});
 
@@ -15,12 +16,15 @@ class profilScreen extends StatefulWidget {
 
 class _profilScreenState extends State<profilScreen> {
 
-  User? _user;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    init();
+   if(_user==null){
+     init();
+   }
+
   }
 
   init()async{
@@ -70,7 +74,7 @@ class _profilScreenState extends State<profilScreen> {
                 children: [
                   Icon(Icons.location_on, color: Colors.grey),
                   SizedBox(width: 10),
-                  Text(" role : "+_user!.role),
+                  Text(" role $c: "+_user!.role),
                 ],
               ),
               SizedBox(height: 10),

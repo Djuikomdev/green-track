@@ -35,6 +35,8 @@ dependencies:
   google_fonts: ^4.0.4
   shared_preferences: ^2.2.3
   expandable_datatable: ^0.0.7
+  intl:
+  hive_flutter:
   hive: ^2.2.3
   dropdown_button2:
   csv:

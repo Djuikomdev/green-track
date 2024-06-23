@@ -1,12 +1,20 @@
+import 'dart:convert';
+
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:expandable_datatable/expandable_datatable.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:greentrack/components/button.dart';
 import 'package:greentrack/services/user_service.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '../../../main.dart';
 import '../../../models/user_model.dart';
+
+
+List<User>? userList = [];
+List<User>? userList2 = [];
 
 class userScreen extends StatefulWidget {
   const userScreen({super.key});
@@ -16,8 +24,7 @@ class userScreen extends StatefulWidget {
 }
 
 class _userScreenState extends State<userScreen> {
-  List<User>? userList = [];
-  List<User>? userList2 = [];
+
 
   bool initPage = false;
 
@@ -34,10 +41,18 @@ class _userScreenState extends State<userScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    init();
+    if(userList!.isEmpty){
+      init();
+    }else{
+      setState(() {
+        initPage = true;
+      });
+    }
   }
 
   init() async {
+    print("start code ...");
+
     var data = await UserService().getAllUsers();
     setState(() {
       initPage = true;
@@ -67,7 +82,8 @@ class _userScreenState extends State<userScreen> {
         ? Center(
             child: CircularProgressIndicator(),
           )
-        : SafeArea(
+        :
+    SafeArea(
             child: Container(
             margin: EdgeInsets.all(10),
             height: context.height() / 1.14,
@@ -229,16 +245,16 @@ class _userScreenState extends State<userScreen> {
                                             children: [
                                               Container(
                                                 width: context.width()/5,
-                                                  child: Text(" ${itemIndex+1} - "+userList![itemIndex].username)),
+                                                  child: Text(" ${itemIndex+1} - "+userList![itemIndex].username,overflow: TextOverflow.ellipsis)),
                                               Container(
                                                   width: context.width()/7,
-                                                  child: Text(userList![itemIndex].email)),
+                                                  child: Text(userList![itemIndex].email,overflow: TextOverflow.ellipsis)),
                                               Container(
                                                   width: context.width()/7,
-                                                  child: Text(userList![itemIndex].phone)),
+                                                  child: Text(userList![itemIndex].phone,overflow: TextOverflow.ellipsis)),
                                               Container(
                                                   width: context.width()/7,
-                                                  child: Text(userList![itemIndex].role)),
+                                                  child: Text(userList![itemIndex].role,overflow: TextOverflow.ellipsis)),
 
                                             ],
                                           ),
@@ -415,10 +431,21 @@ class _userScreenState extends State<userScreen> {
             ),
             ElevatedButton(
               child: const Text('Ajouter'),
-              onPressed: () {
+              onPressed: ()async {
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState!.save();
                   // Ici, vous pouvez ajouter le nouvel utilisateur à votre base de données
+                  var data = {
+                    "username":_username,
+                    "email": _email,
+                    "phone": _phone,
+                    "role": _role,
+                    "date": DateTime.now().toString()
+                  };
+                  print(data);
+
+                  await UserService().addUser(data);
+                  init();
                   Navigator.of(context).pop();
                 }
               },
@@ -437,6 +464,7 @@ class _userScreenState extends State<userScreen> {
     String _email = user.email;
     String _phone = user.phone;
     String _role = user.role;
+
 
     return showDialog<void>(
       context: context,
@@ -507,10 +535,20 @@ class _userScreenState extends State<userScreen> {
             ),
             ElevatedButton(
               child: const Text('Enregistrer'),
-              onPressed: () {
+              onPressed: ()async {
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState!.save();
                   // Ici, vous pouvez mettre à jour les données de l'utilisateur
+                  var data = {
+                    "username":_username,
+                    "email": _email,
+                    "phone": _phone,
+                    "role": _role
+                  };
+                  print(data);
+
+                  await UserService().updateUserById(user.id, data);
+                  init();
                   Navigator.of(context).pop();
                 }
               },

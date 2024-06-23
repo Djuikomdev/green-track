@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:greentrack/Screens/Welcome/welcome_screen.dart';
 import 'package:greentrack/constants.dart';
+import 'package:greentrack/services/user_service.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Screens/main/main_screen.dart';
 import 'controllers/MenuAppController.dart';
@@ -12,8 +15,22 @@ import 'firebase_options.dart';
 
 
 User? userData = FirebaseAuth.instance.currentUser;
+var c = 54;
+
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  // var data = await UserService().getAllUsers();
+  // List<String> userStrings = data.map((user) => {
+  //   "username": user.username,
+  // "phone": user.phone,
+  // "email": user.email,
+  // "role":user.role,
+  // "id":user.id}.toString()).toList();
+  //
+  // prefs.setStringList("users", userStrings);
+
   await Firebase.initializeApp(
     options: FirebaseOptions(
         apiKey: "AIzaSyAqkSFps5dSjsns_TVtpec72awMwD7szXE",

@@ -1,35 +1,35 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../models/client_model.dart';
 import '../models/user_model.dart';
 
-class UserService {
+class ClientService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final String _collectionName = 'users';
+  final String _collectionName = 'clients';
 
 
 
   // Récupérer un produit par son ID
-  Future<User?> getUserById(userId) async {
+  Future<Client?> getClientById(userId) async {
     final DocumentSnapshot snapshot = await _firestore.collection(_collectionName).doc(userId).get();
     if (snapshot.exists) {
       var data = snapshot.data() as Map<String, dynamic>;
-      return User.fromMap(data) ;
+      return Client.fromMap(data) ;
     }
     return null;
   }
 
-  Future<List<User>> getAllUsers() async {
+  Future<List<Client>> getAllClients() async {
     final QuerySnapshot snapshot = await _firestore.collection(_collectionName).get();
-    final List<User> users = [];
+    final List<Client> clients = [];
     for (final DocumentSnapshot doc in snapshot.docs) {
       final Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-      final User user = User.fromMap(data);
-      users.add(user);
+      final Client client = Client.fromMap(data);
+      clients.add(client);
     }
-    return users;
+    return clients;
   }
-
 
   Future<void> addUser(Map<String, dynamic> userData) async {
     try {
@@ -50,12 +50,12 @@ class UserService {
 
 
   // Mettre à jour un produit par son ID
-  Future<void> updateUserById(String id, Map<String, dynamic> data) async {
+  Future<void> updateClientById(String id, Map<String, dynamic> data) async {
     await _firestore.collection(_collectionName).doc(id).update(data);
   }
 
   // Supprimer un produit par son ID
-  Future<void> deleteUserById(String id) async {
+  Future<void> deleteClientById(String id) async {
     await _firestore.collection(_collectionName).doc(id).delete();
   }
 }

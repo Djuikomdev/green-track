@@ -1,14 +1,22 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../models/venter_model.dart';
+
 class VentesService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final String _collectionName = 'ventes';
 
   // Récupérer tous les produits
-  Future<List<Map<String, dynamic>>> getVentes() async {
+  Future<List<Sale>> getVentes() async {
     final QuerySnapshot snapshot = await _firestore.collection(_collectionName).get();
-    return snapshot.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
+    final List<Sale> sales = [];
+    for (final DocumentSnapshot doc in snapshot.docs) {
+      final Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+      final Sale sale = Sale.fromMap(data);
+      sales.add(sale);
+    }
+    return sales;
   }
 
   // Récupérer un produit par son ID
