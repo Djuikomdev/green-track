@@ -141,7 +141,10 @@ var data = [
     "title":"Racks",
     "icon":"assets/icons/menu_doc.svg",
   },
-
+  {
+    "title":"Rapports",
+    "icon":"assets/icons/menu_doc.svg",
+  },
 
   {
     "title":"Parametre",

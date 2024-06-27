@@ -15,7 +15,6 @@ import 'firebase_options.dart';
 
 
 User? userData = FirebaseAuth.instance.currentUser;
-var c = 54;
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();

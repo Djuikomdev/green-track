@@ -25,7 +25,7 @@ class _BottleScreenState extends State<BottleScreen> {
   var selectedFilter = "";
   var selectedFilter2 = "";
   final List<String> items = ['Tout', 'Oxygene', 'Azote'];
-  final List<String> items2 =['Tout', 'Vide', 'Pleine',"En production"] ;
+  final List<String> items2 =['Tout', 'Vide', 'Plein',"Production"] ;
   String? selectedValue;
   String? selectedValue2;
   TextEditingController _searchControlloer = TextEditingController();
@@ -71,6 +71,9 @@ class _BottleScreenState extends State<BottleScreen> {
       });
       return bottleList;
     }else{
+      setState(() {
+        bottleList = bottleList2;
+      });
       var filtedData = bottleList?.where((bottle) {
         return bottle.state.toLowerCase().contains(searchTerm.toLowerCase());
       }).toList();
@@ -140,7 +143,7 @@ class _BottleScreenState extends State<BottleScreen> {
                                     });
                                   },
                                   title: "Rechercher ",
-                                  color: Colors.indigoAccent),
+                                  color: Colors.green),
                             ),
                             SizedBox(width: 16.0),
                             Container(
@@ -150,7 +153,7 @@ class _BottleScreenState extends State<BottleScreen> {
                                     _showAddBottleDialog(context);
                                   },
                                   title: "+  Ajouter une bouteille ",
-                                  color: Colors.indigoAccent),
+                                  color: Colors.red),
                             ),
                           ],
                         ),
@@ -291,6 +294,13 @@ class _BottleScreenState extends State<BottleScreen> {
                                                 style: boldTextStyle(
                                                     color: Colors.white),
                                               )),
+                                          Container(
+                                              width: context.width() / 7,
+                                              child: Text(
+                                                "Localisation",
+                                                style: boldTextStyle(
+                                                    color: Colors.white),
+                                              ))
                                         ],
                                       ),
                                     ),
@@ -334,10 +344,16 @@ class _BottleScreenState extends State<BottleScreen> {
                                                             .nbBottle)),
                                                     Container(
                                                         width:
-                                                            context.width() / 7,
+                                                            context.width() / 13,
                                                         child: Text(bottleList![
                                                                 itemIndex]
                                                             .state)),
+                                                    Container(
+                                                        width:
+                                                        context.width() / 10,
+                                                        child: Text(bottleList![
+                                                        itemIndex]
+                                                            .localisation))
                                                   ],
                                                 ),
                                                 leading: Icon(

@@ -74,7 +74,7 @@ class _profilScreenState extends State<profilScreen> {
                 children: [
                   Icon(Icons.location_on, color: Colors.green),
                   SizedBox(width: 10),
-                  Text(" role $c: "+_user!.role),
+                  Text(" role : "+_user!.role),
                 ],
               ),
               SizedBox(height: 10),

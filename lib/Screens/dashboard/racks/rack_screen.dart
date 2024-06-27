@@ -106,7 +106,7 @@ class _RackScreenState extends State<RackScreen> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('  Liste des bouteilles du Rack $index :'),
+                            Text('  Liste des bouteilles du ${rackList![index].name} :'),
                             ListView.builder(
                               shrinkWrap: true,
                               physics: NeverScrollableScrollPhysics(),

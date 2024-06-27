@@ -98,7 +98,7 @@ class _FileInfoCardGridViewState extends State<FileInfoCardGridView> {
       ),
       itemBuilder: (context, index) => FileInfoCard(
         info: demoMyFiles[index],
-        nb_item: 1540),
+        nb_item: demoMyFiles[index].numOfFiles),
     );
   }
 }

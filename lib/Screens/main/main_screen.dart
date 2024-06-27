@@ -15,6 +15,7 @@ import '../dashboard/bottles/bottle_screen.dart';
 import '../dashboard/clients/client_screen.dart';
 import '../dashboard/components/header.dart';
 import '../dashboard/production/production_screen.dart';
+import '../dashboard/rapports/rapport_screen.dart';
 import '../dashboard/setting/setting_screen.dart';
 import '../dashboard/users/user_screen.dart';
 import '../dashboard/ventes/ventes_screen.dart';
@@ -38,6 +39,7 @@ class _MainScreenState extends State<MainScreen> {
     ProductionScreen(),
     RetourScreen(),
     RackScreen(),
+    RapportScreen(),
     SettingScreen()];
 
 
@@ -45,7 +47,7 @@ class _MainScreenState extends State<MainScreen> {
     var data = await BouteilleService().getBottles();
     setState(() {
       initPage = true;
-      bottleList = data;
+      bottleBacks = data;
       bottleList2 = data;
     });
   }
